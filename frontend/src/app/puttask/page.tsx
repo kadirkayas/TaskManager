@@ -2,29 +2,21 @@
 import axios from "axios"
 import { useState } from "react"
 
-
-
 export default function PutTask() {
     const [id, setId] = useState<string>('')
     const [name, setName] = useState<string>('')
     const [description, setDescription] = useState<string>('')
 
-
     async function handleSubmit(event:React.FormEvent<HTMLFormElement>){
-        event.preventDefault()
+        console.log(id, name, description);
 
+        event.preventDefault()  
 
-        const response =await axios.put('http://localhost:8082/api/task/'+id, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name,
-                description
-            })
+        const response = await axios.put(`http://localhost:8082/api/task/${id}`, {
+            name: name,
+            description: description,
+            completed: true
         })
-
     }
 
     return (
